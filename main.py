@@ -35,14 +35,17 @@ auto_scaling = boto3.client('autoscaling', region_name=NORTH_VIRGINIA_REGION)
 
 waiter_del_lb = load_balancer.get_waiter('load_balancers_deleted')
 delete_load_balancer(load_balancer, LOAD_BALANCER_NAME, waiter_del_lb)
+print("")
 
 time.sleep(30)
 
 delete_auto_scaling_group(auto_scaling, AS_GROUP_NAME)
+print("")
 
 delete_image(ec2_north_virginia, IMAGE_NAME)
 
 delete_launch_configuration(auto_scaling, LAUNCH_CONFIG_NAME)
+print("")
 
 instances_to_delete_nv = delete_instances(ec2_north_virginia, KEY_PAIR_NAME_NV)
 instances_to_delete_ohio = delete_instances(ec2_ohio, KEY_PAIR_NAME_OHIO)
